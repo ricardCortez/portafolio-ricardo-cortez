@@ -2,7 +2,7 @@ document.documentElement.classList.add("js");
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const revealTargets = document.querySelectorAll(
-  ".section-head, .panel, .timeline-item, .project-card, .education-item, .contact-panel"
+  ".section-head, .about-copy, .focus-rail, .timeline-item, .project-card, .education-item, .contact-panel"
 );
 
 revealTargets.forEach((item, index) => {
