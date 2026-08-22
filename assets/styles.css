@@ -902,8 +902,13 @@ section {
 .education-logo img {
   display: block;
   max-width: 100%;
-  max-height: 100%;
+  max-height: 24px;
   object-fit: contain;
+}
+
+.logo-upc img {
+  max-width: 26px;
+  max-height: 26px;
 }
 
 .logo-upc {
