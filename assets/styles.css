@@ -681,81 +681,149 @@ section {
   color: var(--muted);
 }
 
-.projects-grid {
+.projects-showcase {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  background: var(--line);
+  gap: 34px;
 }
 
-.project-card {
+.project-feature {
   position: relative;
-  display: flex;
-  min-height: 392px;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.34fr);
+  gap: 42px;
   overflow: hidden;
-  padding: 28px;
-  background:
-    linear-gradient(180deg, rgba(20, 24, 30, 0.96), rgba(16, 19, 23, 0.98)),
-    var(--bg);
-  transition: color 0.24s ease, transform 0.24s ease;
+  border-top: 1px solid rgba(101, 192, 178, 0.44);
+  border-bottom: 1px solid rgba(226, 162, 77, 0.3);
+  padding: 34px 0;
 }
 
-.project-card::before,
-.project-card::after {
+.project-feature::before,
+.project-feature::after,
+.project-row::before {
   position: absolute;
   content: "";
   pointer-events: none;
 }
 
-.project-card::before {
+.project-feature::before {
   top: 0;
-  left: 28px;
+  bottom: 0;
+  left: 0;
   width: 1px;
-  height: 58px;
-  background: var(--accent-2);
-  opacity: 0.55;
-  transition: height 0.34s ease, opacity 0.34s ease;
+  background: linear-gradient(var(--accent-2), transparent 58%, var(--accent));
 }
 
-.project-card::after {
-  right: 24px;
-  bottom: 24px;
-  width: 86px;
-  height: 86px;
-  border-right: 1px solid rgba(226, 162, 77, 0.42);
-  border-bottom: 1px solid rgba(226, 162, 77, 0.42);
+.project-feature::after {
+  top: 30px;
+  right: 0;
+  width: 34%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(101, 192, 178, 0.58), transparent);
+  opacity: 0.42;
+  transform: translateX(-18px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.project-feature:hover::after {
+  opacity: 0.86;
+  transform: translateX(0);
+}
+
+.project-feature-main {
+  padding-left: 30px;
+}
+
+.project-feature h3 {
+  max-width: 780px;
+  margin-top: 20px;
+  font-size: clamp(2.2rem, 5vw, 4.8rem);
+}
+
+.project-feature p {
+  max-width: 750px;
+  margin: 18px 0 0;
+  color: var(--muted);
+}
+
+.project-feature .project-problem {
+  color: #dde2e4;
+  font-size: 1.02rem;
+}
+
+.project-facts {
+  display: grid;
+  align-self: end;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.project-facts div {
+  display: grid;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+}
+
+.project-facts dt {
+  color: var(--subtle);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+}
+
+.project-facts dd {
+  margin: 0;
+  color: var(--text);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.12rem;
+}
+
+.project-index {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.project-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 54px minmax(260px, 1fr) minmax(170px, 0.36fr) auto;
+  gap: 24px;
+  align-items: center;
+  min-height: 132px;
+  border-bottom: 1px solid var(--line);
+  padding: 24px 0;
+  transition: border-color 0.24s ease, padding-left 0.24s ease;
+}
+
+.project-row::before {
+  top: 0;
+  bottom: 0;
+  left: -18px;
+  width: 3px;
+  background: linear-gradient(var(--accent-2), var(--accent));
   opacity: 0;
-  transform: translate(18px, 18px);
-  transition: opacity 0.34s ease, transform 0.34s ease;
+  transform: scaleY(0.2);
+  transform-origin: top;
+  transition: opacity 0.24s ease, transform 0.28s ease;
 }
 
-.project-card:hover {
-  z-index: 1;
-  transform: translateY(-8px);
+.project-row:hover {
+  border-color: rgba(101, 192, 178, 0.4);
+  padding-left: 14px;
 }
 
-.project-card:hover::before {
-  height: 100%;
+.project-row:hover::before {
   opacity: 1;
+  transform: scaleY(1);
 }
 
-.project-card:hover::after {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-
-.project-card:hover .project-number {
+.project-row:hover .project-number {
   color: var(--accent-2);
 }
 
-.project-card:hover h3 {
-  transform: translateX(12px);
-}
-
-.project-card:hover .project-link {
+.project-row:hover .project-link {
   color: var(--text);
-  transform: translateX(10px);
+  transform: translateX(8px);
 }
 
 .project-number {
@@ -764,24 +832,14 @@ section {
   transition: color 0.24s ease;
 }
 
-.project-card h3 {
-  margin-top: 24px;
-  transition: transform 0.26s ease;
+.project-row h3 {
+  margin-bottom: 8px;
 }
 
-.project-card p {
-  margin: 14px 0 22px;
+.project-row p {
+  margin: 0;
   color: var(--muted);
   font-size: 0.96rem;
-  flex: 1;
-}
-
-.project-card .project-problem {
-  flex: 0;
-  margin-top: 16px;
-  margin-bottom: 10px;
-  color: #d8dcde;
-  font-size: 0.9rem;
 }
 
 .project-stack {
@@ -793,10 +851,13 @@ section {
 .project-link {
   display: inline-flex;
   width: fit-content;
-  margin-top: 20px;
   color: var(--accent-2);
   font-weight: 700;
   transition: color 0.24s ease, transform 0.24s ease;
+}
+
+.project-feature .project-link {
+  margin-top: 26px;
 }
 
 .education-list {
@@ -868,7 +929,8 @@ section {
   transform: translateY(0);
 }
 
-.js .project-card.reveal,
+.js .project-feature.reveal,
+.js .project-row.reveal,
 .js .timeline-item.reveal,
 .js .about-copy.reveal,
 .js .focus-rail.reveal,
@@ -878,11 +940,6 @@ section {
     transform 0.7s ease,
     color 0.24s ease;
   transition-delay: var(--delay, 0ms), var(--delay, 0ms), 0ms;
-}
-
-.js .project-card.reveal.is-visible:hover {
-  transform: translateY(-8px);
-  transition-delay: 0ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -916,12 +973,27 @@ section {
     padding-top: 62px;
   }
 
-  .projects-grid {
+  .project-feature,
+  .project-row {
     grid-template-columns: 1fr;
   }
 
-  .project-card {
+  .project-feature {
+    gap: 26px;
+  }
+
+  .project-facts {
+    margin-left: 30px;
+  }
+
+  .project-row {
+    gap: 12px;
+    align-items: start;
     min-height: auto;
+  }
+
+  .project-row .project-link {
+    margin-top: 6px;
   }
 
   .impact-strip {
@@ -980,6 +1052,14 @@ section {
 
   .section-head {
     gap: 22px;
+  }
+
+  .project-feature-main {
+    padding-left: 22px;
+  }
+
+  .project-facts {
+    margin-left: 22px;
   }
 
   .service-list article {
