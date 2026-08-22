@@ -60,6 +60,60 @@ body::after {
     linear-gradient(180deg, transparent 0 46%, rgba(226, 162, 77, 0.16) 46% 46.25%, transparent 46.25% 100%) 76vw 0 / 1px 100% no-repeat;
 }
 
+.circuit-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.circuit-layer span {
+  position: absolute;
+  display: block;
+  width: 130px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(101, 192, 178, 0.55), transparent);
+  opacity: 0.34;
+  filter: drop-shadow(0 0 10px rgba(101, 192, 178, 0.34));
+  animation: circuit-glint 7s ease-in-out infinite;
+}
+
+.circuit-layer span:nth-child(1) {
+  top: 21%;
+  left: 7%;
+}
+
+.circuit-layer span:nth-child(2) {
+  top: 36%;
+  right: 13%;
+  width: 180px;
+  background: linear-gradient(90deg, transparent, rgba(226, 162, 77, 0.5), transparent);
+  animation-delay: 1.8s;
+}
+
+.circuit-layer span:nth-child(3) {
+  top: 68%;
+  left: 28%;
+  width: 96px;
+  background: linear-gradient(90deg, transparent, rgba(174, 191, 255, 0.48), transparent);
+  animation-delay: 3.4s;
+}
+
+@keyframes circuit-glint {
+  0%,
+  68%,
+  100% {
+    opacity: 0.08;
+    transform: translateX(-18px) scaleX(0.65);
+  }
+
+  78% {
+    opacity: 0.52;
+    transform: translateX(18px) scaleX(1);
+  }
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -219,8 +273,13 @@ button:focus-visible {
   color: var(--text);
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.is-active::after {
   transform: scaleX(1);
+}
+
+.nav-links a.is-active {
+  color: var(--accent-2);
 }
 
 .hero {
@@ -520,6 +579,83 @@ section {
   font-size: 0.78rem;
 }
 
+.impact-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.impact-item {
+  display: grid;
+  align-content: start;
+  min-height: 260px;
+  padding: 26px 28px 26px 0;
+  border-right: 1px solid var(--line);
+}
+
+.impact-item + .impact-item {
+  padding-left: 28px;
+}
+
+.impact-item:last-child {
+  border-right: 0;
+}
+
+.impact-item span,
+.service-list span {
+  color: var(--accent-2);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.impact-item h3 {
+  margin-top: 22px;
+}
+
+.impact-item p {
+  margin: 12px 0 28px;
+  color: var(--muted);
+}
+
+.impact-item strong {
+  align-self: end;
+  color: var(--accent);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.55rem;
+}
+
+.service-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.48fr) minmax(0, 1fr);
+  gap: 68px;
+}
+
+.service-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.service-list article {
+  display: grid;
+  grid-template-columns: 58px minmax(180px, 0.42fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line);
+  padding: 22px 0;
+}
+
+.service-list h3 {
+  font-size: 1.05rem;
+}
+
+.service-list p {
+  margin: 0;
+  color: var(--muted);
+}
+
 .timeline {
   display: grid;
   gap: 0;
@@ -547,7 +683,7 @@ section {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   background: var(--line);
 }
@@ -638,6 +774,14 @@ section {
   color: var(--muted);
   font-size: 0.96rem;
   flex: 1;
+}
+
+.project-card .project-problem {
+  flex: 0;
+  margin-top: 16px;
+  margin-bottom: 10px;
+  color: #d8dcde;
+  font-size: 0.9rem;
 }
 
 .project-stack {
@@ -761,7 +905,8 @@ section {
   .hero,
   .section-head,
   .about-grid,
-  .contact-panel {
+  .contact-panel,
+  .service-layout {
     grid-template-columns: 1fr;
   }
 
@@ -777,6 +922,22 @@ section {
 
   .project-card {
     min-height: auto;
+  }
+
+  .impact-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-item,
+  .impact-item + .impact-item {
+    min-height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 24px 0;
+  }
+
+  .impact-item:last-child {
+    border-bottom: 0;
   }
 }
 
@@ -819,6 +980,14 @@ section {
 
   .section-head {
     gap: 22px;
+  }
+
+  .service-list article {
+    grid-template-columns: 42px 1fr;
+  }
+
+  .service-list p {
+    grid-column: 2;
   }
 
   .timeline-item {
