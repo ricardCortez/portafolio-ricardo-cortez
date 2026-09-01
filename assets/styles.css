@@ -860,6 +860,10 @@ section {
   margin-top: 26px;
 }
 
+.project-feature .project-link + .project-link {
+  margin-left: 18px;
+}
+
 .education-layout {
   display: grid;
   grid-template-columns: minmax(300px, 0.48fr) minmax(0, 1fr);
